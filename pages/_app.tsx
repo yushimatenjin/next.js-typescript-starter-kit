@@ -1,7 +1,7 @@
 import 'isomorphic-fetch'
 import * as React from 'react'
 import {Provider} from 'react-redux'
-import App, {Container} from 'next/app'
+import App from 'next/app'
 import {getStore} from '../src/store'
 
 export default class extends App {
@@ -28,11 +28,9 @@ export default class extends App {
     const {Component, pageProps} = props
 
     return (
-      <Container>
         <Provider store={getStore(undefined, props.server)}>
           <Component {...pageProps} />
         </Provider>
-      </Container>
     )
   }
 }

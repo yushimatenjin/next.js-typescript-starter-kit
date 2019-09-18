@@ -3,7 +3,7 @@ import {reducer, RootState} from './redux'
 import {DEV} from './constants/env'
 import thunk from 'redux-thunk'
 import {createLogger} from 'redux-logger';
-import {persistStore, autoRehydrate} from 'redux-persist'
+import {persistStore} from 'redux-persist'
 import {session} from './redux/system'
 
 let store
@@ -30,13 +30,12 @@ export const getStore = (state, isServer?): Store<RootState> => {
       store = createStore<RootState, any, {}, undefined>(
         reducer,
         state,
-        composeEnhancers(applyMiddleware(...mw), autoRehydrate())
+        composeEnhancers(applyMiddleware(...mw))
       )
       store.dispatch(session());
 
-      const whitelist = ['persist']
-      persistStore(store, {whitelist}, _ => {
-        console.log(`define whitelist: ${whitelist.join(', ')}`)
+      persistStore(store, null, ()=> {
+        store.getState()
       })
     }
     return store

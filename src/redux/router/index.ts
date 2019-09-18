@@ -6,6 +6,6 @@ export function addRouteCompleteEvent(fx: (url) => void) {
 
 const onRouteCompleteEvents = []
 
-Router.onRouteChangeComplete = (url) => {
-  onRouteCompleteEvents.forEach(fx => fx(url))
-}
+// Router.onRouteChangeComplete = (url) => {
+//   onRouteCompleteEvents.forEach(fx => fx(url))
+// }
